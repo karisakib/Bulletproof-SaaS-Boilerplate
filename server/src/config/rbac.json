@@ -1,0 +1,36 @@
+{
+ "managerial_roles": [
+   {
+     "name": "Admin",
+     "permissions": [
+       "create_record",
+       "read_record",
+       "update_record",
+       "delete_record"
+     ]
+   },
+   {
+     "name": "Executive",
+     "permissions": [
+       "read_record"
+     ]
+   }
+ ],
+ "non_managerial_roles": [
+   {
+     "name": "User",
+     "permissions": [
+       "create_record",
+       "read_record",
+       "update_record",
+       "delete_record"
+     ]
+   },
+   {
+     "name": "Guest",
+     "permissions": [
+       "read_record"
+     ]
+   }
+ ]
+}
