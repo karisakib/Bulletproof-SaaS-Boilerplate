@@ -102,6 +102,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")));
 // app.use(express.static(path.join(__dirname, "../public")));
+// app.use(express.static("public", { maxAge: "1y" })); Cache Static Files Efficiently Ensures better load speeds and reusability
+
 
 // Routers
 // app.use("/", uploadRouter);

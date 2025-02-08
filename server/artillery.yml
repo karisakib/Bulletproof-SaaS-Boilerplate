@@ -1,0 +1,37 @@
+config:
+ http:
+  extendedMetrics: true
+ tls: false
+ rejectUnauthorized: false
+ target: "http://localhost:3000"
+ phases:
+  - duration: 60
+    arrivalRate: 1
+    rampTo: 10
+    name: Warm up
+  - duration: 60
+    arrivalRate: 10
+    rampTo: 20
+    name: Ramp up
+  - duration: 60
+    arrivalRate: 20
+    rampTo: 30
+    name: Spike
+ plugins:
+  ensure: {}
+  apdex: {}
+  metrics-by-endpoint: {}
+ apdex:
+  threshold: 100
+ ensure:
+  threshold:
+   - http.response_time.p99: 100
+   - http.response_time.p95: 75
+
+scenarios:
+ - flow:
+    - loop:
+       - get:
+          url: "/"
+      count: 100
+      name: "GET /"
