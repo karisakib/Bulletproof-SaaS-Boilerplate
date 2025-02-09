@@ -7,8 +7,7 @@ const { error } = require("console");
 const { authenticateUser } = require("./controller");
 const auth = require("@/middleware/authMiddleware");
 const { v4: uuidv4 } = require("uuid");
-const regexPatterns = require("@/utils/regex");
-const log = require("@/utils/logger")
+// const log = require("@/utils/logger")
 
 const router: Router = Router();
 // Protected route

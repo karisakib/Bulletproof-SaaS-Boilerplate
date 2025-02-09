@@ -1,7 +1,5 @@
 require("dotenv").config();
 import fs from "fs";
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
 const createError = require("http-errors"); // TODO: Delete CJS import
 // import { HttpError } from "http-errors";
 import express, { Express, Request, Response, NextFunction } from "express";
@@ -32,7 +30,7 @@ require("./config/mongoDB.js");
 // require("./config/postgres.js");
 
 // Logging imports
-const { logger } = require("./utils/logger.js");
+// const { logger } = require("./utils/logger.js");
 
 // API KEY FUNCTION TEST
 // require("./utils/generateApiKey.js")
@@ -87,7 +85,7 @@ app.use(
      responseTime: message.split(" ")[3],
      label: "http-response",
     };
-    logger.info(JSON.stringify(logObject), { });
+    // logger.info(JSON.stringify(logObject), { });
    },
   },
  })
@@ -103,6 +101,7 @@ app.use(cookieParser());
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")));
 // app.use(express.static(path.join(__dirname, "../public")));
 // app.use(express.static("public", { maxAge: "1y" })); Cache Static Files Efficiently Ensures better load speeds and reusability
+app.use(compression());
 
 
 // Routers
@@ -110,20 +109,38 @@ app.use(favicon(path.join(__dirname, "../public/favicon.ico")));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", apiRouter);
 
-app.use(compression());
 
-app.get("/", (req: Request, res: Response) => {
- res.send("Express + TypeScript Server");
+// 404 Error Middleware - For API Routes Only (Not React Frontend)
+app.use("/api/*", (req: Request, res: Response, next: NextFunction) => {
+ // next(createError(404, "API route not found"));
+ res.status(404).json({
+  status: "error",
+  message: "Not Found",
 });
 
-// The infamous 404 route - ALWAYS Keep this as the last route
-app.use("*", (req: Request, res: Response) => {
- logger.error("404 Not Found");
- res.status(404).json({
-  status: "fail",
-  message: `Can't find ${req.originalUrl}`,
+});
+
+// Global Error Handler Middleware (Handles All Errors)
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+ console.error(err); // Log error for debugging
+
+ res.status(err.status || 500).json({
+   status: "error",
+   message: err.message || "Internal Server Error",
+   stack: process.env.NODE_ENV === "production" ? undefined : err.stack, // Hide stack trace in production
  });
 });
 
-// module.exports = app;
+
+// Serve static assets from the correct folder
+app.use(express.static(path.join(__dirname, "../../client/dist")));
+
+// Ensure CSS, JS, and other assets are correctly served
+app.use("/assets", express.static(path.join(__dirname, "../../client/dist/assets")));
+
+// Catch-all route to serve React app for SPA routing
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../client/dist", "index.html"));
+});
+
 export default app

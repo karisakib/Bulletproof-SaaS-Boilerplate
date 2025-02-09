@@ -23,10 +23,10 @@ const httpsOptions = {
 };
 
 // Start HTTPS 1.1 server
-https.createServer(httpsOptions, app).listen(config.dev.port, () => {
- logger.info(`App running on https://localhost:${config.dev.port}`, {});
- console.log(`App running on https://localhost:${config.dev.port}`);
-});
+// https.createServer(httpsOptions, app).listen(config.port, () => {
+//  // logger.info(`App running on https://localhost:${config.dev.port}`, {});
+//  console.log(`App running on https://localhost:${config.dev.port}`);
+// });
 
 // Start HTTP2 Secure Server
 // const server = createServer({
@@ -40,6 +40,7 @@ https.createServer(httpsOptions, app).listen(config.dev.port, () => {
 // });
 
 // Start Express App
-// app.listen(config.dev.port, () => {
-//  logger.info(`App running on port http://localhost:${config.dev.port}`, {})
-// });
+app.listen(config.port, () => {
+ // logger.info(`App running on port http://localhost:${config.dev.port}`, {})
+  console.log(`App running on http://localhost:${config.port}`);
+});

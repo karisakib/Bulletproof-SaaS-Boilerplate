@@ -1,0 +1,1 @@
+Privacy Policy, Cookies Policy, Return/Refund Policy, Disclaimer, EULA, Warranty Policy.

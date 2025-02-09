@@ -1,6 +1,13 @@
 import { Helmet } from "react-helmet-async";
 
-const SEO = ({ title, description, url }) => {
+interface SEOProps {
+  title: string;
+  description: string;
+  url: string;
+  image?: string
+}
+
+const SEO = ({ title, description, url }: SEOProps) => {
   return (
     <Helmet>
       <title>{title}</title>

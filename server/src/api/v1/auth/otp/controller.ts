@@ -1,6 +1,5 @@
 const OTPModel = require("./model");
 const { hashData, verifyHashedData } = require("../../../../utils/hashData");
-const sendEmail = require("../../../../utils/sendEmail");
 const generateOTP = require("../../../../utils/generateOTP");
 
 const { EMAIL_AUTH_EMAIL } = process.env;

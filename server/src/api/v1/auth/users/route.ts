@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import log from "@/utils/logger";
+// import log from "@/utils/logger";
 import bcrypt from "bcryptjs";
 import UserModel from "../users/model"
 import OTPModel from "../otp/model";
@@ -7,7 +7,6 @@ const { hashData, verifyHashedData } = require("@/utils/hashData");
 const { authenticateUser } = require("./controller");
 const auth = require("@/middleware/authMiddleware");
 import { v4 } from "uuid";
-const regexPatterns = require("@/utils/regex");
 
 // const sendOTP = require("./controller");
 
@@ -39,7 +38,7 @@ router.post("/register", async (req: Request, res: Response) => {
   lastName = lastName.trim();
   email = email.trim();
   password = password.trim();
-  log.info("Validating user input now!")
+  // log.info("Validating user input now!")
 
   // Validate if all required data is not empty
   if (!firstName || !lastName || !email || !password) {
@@ -49,29 +48,29 @@ router.post("/register", async (req: Request, res: Response) => {
   }
 
   // Check if name passes regex
-  if (
-   !regexPatterns.nameRegex.test(firstName) ||
-   !regexPatterns.nameRegex.test(lastName)
-  ) {
-   res.status(400).json({
-    error: "Names must only contain letters, hyphens, and apostrophes.",
-   });
-  }
+  // if (
+  //  not !regexPatterns.nameRegex.test(firstName) ||
+  //  not !regexPatterns.nameRegex.test(lastName)
+  // ) {
+  //  res.status(400).json({
+  //   error: "Names must only contain letters, hyphens, and apostrophes.",
+  //  });
+  // }
 
-  // Check if email passes regex
-  if (!regexPatterns.emailRegex.test(email)) {
-   res.status(400).json({
-    error: "Not a valid email.",
-   });
-  }
+  // // Check if email passes regex
+  // if (!regexPatterns.emailRegex.test(email)) {
+  //  res.status(400).json({
+  //   error: "Not a valid email.",
+  //  });
+  // }
 
-  // Check if password passes regex
-  if (!regexPatterns.passwordRegex.test(password)) {
-   res.status(400).json({
-    error:
-     "Password must be 8-16 characters, including letters, digits, and special character from @$!%*?&",
-   });
-  }
+  // // Check if password passes regex
+  // if (!regexPatterns.passwordRegex.test(password)) {
+  //  res.status(400).json({
+  //   error:
+  //    "Password must be 8-16 characters, including letters, digits, and special character from @$!%*?&",
+  //  });
+  // }
 
   // Hash password once validation is successful
   const hashedPassword = await hashData(password);
@@ -260,7 +259,7 @@ router.patch("/deactivate", async (req, res) => {
    message: `User account with ${email} deactivated`,
   });
  } catch (err) {
-  log.error(`Error deactivating user account with email ${email}`);
+  // log.error(`Error deactivating user account with email ${email}`);
   res.status(500).json({ error: err.message });
  }
 });
@@ -274,7 +273,7 @@ router.patch("/reactivate", async (req, res) => {
    message: `User account with ${email} reactivated`,
   });
  } catch (err) {
-  log.error(`Error reactivating user account with email ${email}`);
+  // log.error(`Error reactivating user account with email ${email}`);
   res.status(500).json({ error: err.message });
  }
 });
@@ -294,7 +293,7 @@ router.delete("/delete", async (req: Request, res: Response) => {
    message: `User account with ${email} suspended`,
   });
  } catch (err) {
-  log.error(`Error deleting user account with email ${email}`);
+  // log.error(`Error deleting user account with email ${email}`);
   res.status(500).json({ error: err.message });
  }
 });
