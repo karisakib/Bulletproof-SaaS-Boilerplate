@@ -37,7 +37,7 @@
      "@auth/*": ["src/api/v1/auth"],
      "@users/*": ["src/api/v1/users"],
      "@config/*": ["src/config"],
-     "@interface/*": ["src/interface"],
+     "@interface/*": ["src/types"],
      "@lib/*": ["src/lib"],
      "@middleware/*": ["src/middleware"],
      "@models/*": ["src/models"],

@@ -10,8 +10,8 @@ function Landing(): ReactNode {
     description="Put this in the global SEO config file"
     url="Put this in the global SEO config file"
    />
-   <h1 className="text-3xl font-bold underline">
-    Landing route from Client-side
+   <h1>
+   Landing route from Client-side
    </h1>
   </BaseLayout>
  );

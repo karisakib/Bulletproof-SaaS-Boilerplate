@@ -4,7 +4,7 @@ import { LANDING_ROUTES } from './landing.routes';
 // import { DASHBOARD_ROUTES } from './dashboard.routes';
 // import { ADMIN_ROUTES } from './admin.routes';
 // import { BLOG_ROUTES } from "./blog.routes";
-// import { LEGAL_ROUTES } from "./legal.routes";
+import { LEGAL_ROUTES } from "./legal.routes";
 
 
 export const routes: RouteObject[] = [
@@ -13,5 +13,5 @@ export const routes: RouteObject[] = [
  // ...DASHBOARD_ROUTES,
  // ...ADMIN_ROUTES,
  // ...BLOG_ROUTES,
- // ...LEGAL_ROUTES
+ ...LEGAL_ROUTES
 ];

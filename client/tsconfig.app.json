@@ -35,5 +35,5 @@
      "@views/*": ["src/views"],
     },      
   },
-  "include": ["src"]
+  "include": ["src",  "src/types"]
 }
