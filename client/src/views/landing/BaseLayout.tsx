@@ -1,20 +1,25 @@
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 
-import { ReactNode } from "react";
-
 interface BaseLayoutProps {
- children: ReactNode;
+  children: React.ReactNode;
 }
 
 const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
- return (
-  <div>
-   <Navbar />
-   <main>{children}</main>
-   <Footer />
-  </div>
- );
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Fixed Navbar */}
+      <Navbar />
+
+      {/* Main Content (Centered) */}
+      <main className="flex-grow flex items-center justify-center px-6">
+        {children}
+      </main>
+
+      {/* Footer at the bottom */}
+      <Footer />
+    </div>
+  );
 };
 
 export default BaseLayout;
