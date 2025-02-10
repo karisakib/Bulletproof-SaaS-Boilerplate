@@ -1,12 +1,12 @@
 ├── tests/             # 📌 Your test directory
-│   ├── e2e/           # 🧪 End-to-End tests (Cypress, Playwright)
+│   ├── e2e/           # 🧪 End-to-End tests (Playwright)
 │   ├── unit/          # ✅ Unit tests (Jest, React Testing Library)
 │   ├── integration/   # 🔗 Integration tests (Component + API + State)
 │   ├── a11y/          # ♿ Accessibility tests (jest-axe, axe-core)
 
 
 tests/
-├── e2e/               # 🧪 End-to-End tests (Cypress, Playwright)
+├── e2e/               # 🧪 End-to-End tests (Playwright)
 │   ├── login.test.ts
 │   ├── signup.test.ts
 │   ├── dashboard.test.ts
