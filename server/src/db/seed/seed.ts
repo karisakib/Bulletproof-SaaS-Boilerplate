@@ -1,4 +1,4 @@
-import { sql } from "../db";
+import { sql } from "../db.db";
 import { v4 } from "uuid";
 
 // https://dev.to/opeoginni/how-to-use-the-postgresjs-library-jh

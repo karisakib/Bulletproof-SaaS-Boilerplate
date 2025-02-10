@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 const usersRouter: Router = Router();
 
-import router from "./route"
+import router from "./users-routes"
 
 usersRouter.use("/users", router)
 usersRouter.get("/test", async (req: Request, res: Response) => {
