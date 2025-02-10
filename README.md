@@ -52,6 +52,71 @@ The **Bulletproof SaaS Boilerplate** is a fully scalable, production-grade found
 | **Containerization**       | Entire application dockerized for portability                                   | Backend  |
 | **CI/CD**                  | GitHub Actions configured for automated deployment workflows                    | Backend  |
 
+## `views` structure
+```plaintext
+views/
+├── auth/
+│   ├── Login.tsx
+│   ├── Signup.tsx
+│   ├── ForgotPassword.tsx
+│   ├── AuthLayout.tsx       # Optional layout for auth pages
+│   ├── authRoutes.tsx       # Routes for authentication
+```
+
+## Code Standards
+```javascript
+// Constacts: All caps
+const CACHE_CONTROL_HEADER = 'public, max-age=300'
+
+// Functions and variables: camelCase
+const createUserHandler = (req, res) => {}
+
+// Classes and Models: PascalCase
+class AppError extends Error {}
+
+//Files and folders: kebab-case
+// *-routes.js
+// *-handlers.js
+```
+
+## Hierarchical Config
+
+Use hierarchical config to organize environment variables by different environments
+
+```javascript
+const config = {
+  environment: process.env.NODE_ENV,
+  port: process.env.PORT,
+}
+
+// 👎 The object name already holds the context
+const user = {
+  userName: '...',
+  userEmail: '...',
+  userAddress: '...',
+}
+
+// 👍 Remove the unnecessary prefix
+const user = {
+  name: '...',
+  email: '...',
+  address: '...',
+}
+
+const config = {
+  storage: {
+    bucketName: process.env.S3_BUCKET_NAME,
+  },
+  database: {
+    name: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+  },
+}
+
+export default config
+```
+
 ## Performance Notes:
 
 ### Summary of Speed Ratings
@@ -607,3 +672,253 @@ E.g. Using “fields” query parameter for selected fields to be included in th
 ##### Rule: CORS preflight should be enabled
 
 CORS relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request.
+
+
+## Guide To Testing The Backend
+
+
+If short on time, prefer integration tests over unit tests because it covers logical workflows ands business logic
+
+Unit test the business logic which is under your control.
+
+
+Follow the Arrange-Act-Assert pattern in testing.
+
+```javascript
+describe('User Service', () => {
+  it('Should create a user given correct data', async () => {
+    // 1. Arrange - prepare the data, create any objects you need
+    const mockUser = {
+      // ...
+    }
+    const userService = createUserService(
+      mockLogger,
+      mockQueryBuilder
+    )
+
+    // 2. Act - execute the logic that you're testing
+    const result = userService.create(mockUser)
+
+    // 3. Assert - validate the expected result
+    expect(mockLogger).toHaveBeenCalled()
+    expect(mockQueryBuilder).toHaveBeenCalled()
+    expect(result).toEqual(/** ... */)
+  })
+})
+```
+
+* Use Artillery for stress testing
+* Create test users to test permissions
+* Create test users to test authentication
+* Create test users to test api resources
+* Give test user names and personalities
+
+
+
+
+## Users ER Diagram
+
+```mermaid
+erDiagram
+    Users {
+        String _id PK
+        String firstName
+        String lastName
+        String profilePhoto
+        String email
+        String hashedPassword
+        Boolean verified
+        String userRole
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserAccountSecurity {
+        String _id PK
+        String userId FK
+        String refreshToken
+        String resetToken
+        Date lastPasswordChange
+        Date lastEmailChange
+        Date lastAccountChange
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserPreferences {
+        String _id PK
+        String userId FK
+        String theme
+        String language
+        Boolean notificationSettings_emailNotifications
+        Boolean notificationSettings_smsNotifications
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserSessions {
+        String _id PK
+        String userId FK
+        String sessionId
+        String ipAddress
+        String userAgent
+        Date loginTime
+        Date logoutTime
+        Boolean isAnonymous
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserSecurityAnswers {
+        String _id PK
+        String userId FK
+        Number questionId
+        String answerHash
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserSecurityQuestions {
+        String _id PK
+        String userId FK
+        Number questionId
+        String answerHash
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserInteractions {
+        String _id PK
+        String userId FK
+        String interactionType
+        Mixed interactionDetails
+        Date timestamp
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserSubscriptions {
+        String _id PK
+        String userId FK
+        String subscriptionType
+        Number creditsUsed
+        Number creditsRemaining
+        Date subscriptionStart
+        Date subscriptionEnd
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```mermaid
+erDiagram
+    UserPayments {
+        String _id PK
+        String userId FK
+        String paymentMethod
+        Number amount
+        Date paymentDate
+        String billingAddress
+        String cardLastFourDigits
+        Date createdAt
+        Date updatedAt
+    }
+```
+
+```plaintext
+    %% Relations
+    UserAccountSecurity ||--|| Users : "belongs to"
+    UserPreferences ||--|| Users : "belongs to"
+    UserSessions ||--|| Users : "belongs to"
+    UserSecurityAnswers ||--|| Users : "belongs to"
+    UserSecurityQuestions ||--|| Users : "belongs to"
+    UserInteractions ||--|| Users : "belongs to"
+    UserSubscriptions ||--|| Users : "belongs to"
+    UserPayments ||--|| Users : "belongs to"
+```
+
+
+## Demo and POC Best Practices
+1. Use JSON with readFileStream to mock RestAPI calls.
+2. Build on the product backend and business functions until solidified.
+3. Only move from hard coded backend when mock exemplifies product very closely.
+
+
+## Pressing Questions
+* What are the helmet.js configs for public facing API's?
+* What are the helmet.js configs for internal API's?
+* What is the best way to implement role-based security (aka RBAC)?
+* Should I create a separate table/ collection for roles/ permissions?
+* What are the different types of user roles my app needs?
+* What is the recommended System Inactivity Timeout before system logs user out?
+* What is the difference between a user role and a security profile?
+* How much user login history should be kept?
+* What integration can we use for SAML (Security Assertion Markup Language)? 
+* What integration can we use for SSO (Single Sign On)?
+* How to implement OAuth 2.0?
+* How to integrate Auth0 by Okta?
+* How to integrate GitHub sign up / login ?
+* How to integrate Apple sign up / login ?
+* How to integrate Google sign up / login ?
+* How to integrate Facebook sign up / login ?
+* How to implement API Key authorization?
+
+
+
+## Developer API's and SDK's:
+---
+- Provide developers a client side SDK for your API. These code packages are designed to help developers get up and running quickly with their projects by simplifying some of the transactional layers and setup of an application.
+
+- Ido Green, developer advocate at Google, on what makes an API good: “The API should enable developers to do one thing really well. It’s not as easy as it sounds, and you want to be clear on what the API is not going to do as well.”
+
+- Make your developer APIs fast and easy to get started using.
+
+- No matter how carefully we design and build our core API, developers continue to create products we’d never expect. We give them the freedom to build what they like. Designing an API is much like designing a transportation network. Rather than prescribing an end state or destination, a good API expands the very notion of what’s possible for developers. Romain Huet, head of developer relations at Stripe
+
+- In some cases, you can supplement the ease of use by providing interactive documentation online, where developers have a sandbox to test out your API. Oftentimes, developers can use these interfaces to test code and preview results without having to implement authentication. A great example of sandbox-based documentation is Stripe’s documentation.
+
+![Stripe's interactive API documentation for developers](IMG_3942.jpeg)
+
+- APIs need to be consistent. That could include anything from data access patterns to error handling to naming. The reason consistency is important is that it reduces the cognitive load on developers who are trying to figure out your API. With less consistency, different developers will need to reimplement the same logic over and over again.
+
+- Another best practice for designing APIs is making troubleshooting easy for developers. This can be done through returning meaningful errors as well as by building tooling. Providing these errors with details leads to a better developer experience. Error codes that are machine-readable strings allow developers to programmatically handle errors in their code bases.
+
+---
+When deprecating an API or an endpoint, add release notes to indicate deprecation.
+
+Documentations should always provide sample code.
+
+The API and the documentation both should be easy to understand.
+
+The API should have a good SDK in multiple languages.
+
+The API should be easy to test.
+---
+Building a successful API is an art, comprising business analysis, technology architecture, software development, partnership, content writing, developer relations, support, and marketing.
+
+Validate your API with real users; ask your developers for constant feedback; be transparent with your changes, policies, rate limits, and updates; and be a member of your own developer community.
+
+After you unlock the product-market fit for your API and foster a developer ecosystem around it, you will experience magic—developers will use your API to innovate, empower amazing new solutions, and build things you didn’t think were possible.
+
+There is no better feeling than building something that millions of people use every day to make their lives better. Trust us, we have done that, and you can, too.
