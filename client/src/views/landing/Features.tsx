@@ -1,5 +1,5 @@
-import SEO from "../components/SEO";
-import BaseLayout from "../layouts/BaseLayout";
+import SEO from "../../components/common/SEO";
+import BaseLayout from "./BaseLayout";
 
 function Features() {
  return (

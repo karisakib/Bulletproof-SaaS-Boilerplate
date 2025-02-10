@@ -1,7 +1,8 @@
-import SEO from "../components/SEO";
-import BaseLayout from "../layouts/BaseLayout";
+import { ReactNode } from "react";
+import SEO from "../../components/common/SEO";
+import BaseLayout from "./BaseLayout";
 
-function About() {
+function About(): ReactNode {
  return (
   <BaseLayout>
    <SEO
