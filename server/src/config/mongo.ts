@@ -1,4 +1,6 @@
-require("dotenv").config();
+import { config } from "dotenv";
+config();
+
 const mongoose = require("mongoose");
 
 const connectToMongoDB = async () => {

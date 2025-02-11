@@ -4,7 +4,7 @@ const router: Router = Router();
 
 // Manage Site Content:
 
-// View Content: GET /admin/content
+// View Content: GET /content
 router.get("/", (req: Request, res: Response) => {
  res.status(200).json({
   status: "OK",
@@ -14,7 +14,7 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 
-// Create Content: POST /admin/content
+// Create Content: POST /content
 router.post("/", (req: Request, res: Response) => {
  res.status(201).json({
   status: "OK",
@@ -23,7 +23,7 @@ router.post("/", (req: Request, res: Response) => {
  })
 });
 
-// Edit Content: PUT /admin/content/:contentId
+// Edit Content: PUT /content/:contentId
 router.put("/:contentId", (req: Request, res: Response) => {
  res.status(200).json({
   status: "OK",
