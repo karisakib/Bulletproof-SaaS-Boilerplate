@@ -1,27 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
-
-datasource db {
-  provider = "sqlite"
-  url      = "file:../../../src/db/db.db"
-}
-
-
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
-  name      String?
-  createdAt DateTime @default(now())
+ id           Int      @id @default(autoincrement())
+ email        String   @unique
+ username     String   @unique
+ first_name   String?
+ last_name    String?
+ verified     Boolean  @default(false)
+ role         String
+ subscription String
+ createdAt    DateTime @default(now())
+
+ // Relations
+ auth        Auth?
+ preferences UserPreferences?
+ apiKey      ApiKey?
+}
+
+model Auth {
+ email        String   @id // Changed to @id to represent 1:1 relationship with User
+ hash         String
+ otp          String
+ retries      Int      @default(0)
+ refreshToken String?
+ resetToken   String?
+ createdAt    DateTime @default(now())
+ expiresAt    DateTime
+
+ // Relation back to User
+ user   User @relation(fields: [userId], references: [id])
+ userId Int
+}
+
+model UserPreferences {
+ email               String  @id
+ theme               String  @default("light")
+ email_notifications Boolean @default(true)
+ sms_notifications   Boolean @default(false)
+
+ // Relation back to User
+ user User @relation(fields: [email], references: [email])
+}
+
+model ApiKey {
+ email     String   @id
+ api_key   String   @default(uuid())
+ createdAt DateTime @default(now())
+
+ // Relation back to User
+ user User @relation(fields: [email], references: [email])
 }

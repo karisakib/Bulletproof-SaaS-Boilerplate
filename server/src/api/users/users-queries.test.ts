@@ -1,5 +1,5 @@
 import { PrismaClient } from 'prisma/client';
-import { UserQueries } from './user-queries';
+import { UserQueries } from './users-queries';
 
 jest.mock('prisma/client');
 

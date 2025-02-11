@@ -23,7 +23,7 @@ const YAML = require("yaml");
 // const config = require("./config/config");
 
 // Custom Middleware Imports
-const maintenanceMiddleware = require("./middleware/maintenanceMiddleware");
+// const maintenanceMiddleware = require("./middleware/maintenanceMiddleware");
 
 // Database imports
 require("./config/mongoDB.js");
@@ -32,13 +32,8 @@ require("./config/mongoDB.js");
 // Logging imports
 // const { logger } = require("./utils/logger.js");
 
-// API KEY FUNCTION TEST
-// require("./utils/generateApiKey.js")
-
 // Router imports
-// const uploadRouter = require("./routes/uploadRoutes.js");
-// const apiRouter = require("./api/api.js"); // TODO: Delete CJS import
-import apiRouter from "@/api/api.js"
+import apiRouter from "@/api/index.js"
 
 // Swagger docs import
 // const swaggerDocument = require("./swagger.json")
@@ -98,7 +93,7 @@ app.use(xss());
 app.use(hpp());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(favicon(path.join(__dirname, "../public/favicon.ico")));
+// app.use(favicon(path.join(__dirname, "../public/favicon.ico")));
 // app.use(express.static(path.join(__dirname, "../public")));
 // app.use(express.static("public", { maxAge: "1y" })); Cache Static Files Efficiently Ensures better load speeds and reusability
 app.use(compression());

@@ -1,5 +1,5 @@
-import { UserService } from './user-queries';
-import { UserQueries } from './user-queries';
+import { UserService } from './users-queries';
+import { UserQueries } from './users-queries';
 
 jest.mock('./user-queries')
 

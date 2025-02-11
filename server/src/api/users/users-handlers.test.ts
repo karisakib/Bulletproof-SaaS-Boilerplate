@@ -1,6 +1,6 @@
 import request from 'supertest';
 import express from 'express';
-import { UserHandlers } from './user-queries';
+import { UserHandlers } from './users-queries';
 
 const app = express();
 app.use(express.json());

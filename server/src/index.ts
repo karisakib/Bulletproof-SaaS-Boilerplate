@@ -3,7 +3,7 @@ import fs from "fs"
 import app from "./server"
 // import { createServer } from "http2";
 import config from "../src/config/config"
-import { logger } from "./utils/logger"
+// import { logger } from "./utils/logger"
 
 // Confirm paths to certificates
 const keyPath = `${os.homedir()}/localhost-key.pem`;
