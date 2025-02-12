@@ -1,35 +1,41 @@
 {
- "name": "bulletproof-saa-boilerplate",
- "version": "1.0.0",
- "private": true,
- "description": "Bulletproof SaaS Boilerplate",
- "workspaces": [
-  "client",
-  "server",
-  "e2e"
- ],
- "scripts": {
-  "dev:client": "pnpm --filter client run dev",
-  "dev:server": "pnpm --filter server run dev",
-  "dev": "pnpm --parallel run dev:client dev:server",
-  "test:client": "pnpm --filter client run test",
-  "test:server": "pnpm --filter server run test",
-  "test:e2e": "pnpm --filter e2e run test",
-  "build:client": "pnpm --filter client run build",
-  "build:server": "pnpm --filter server run build"
-}, 
- "pnpm": {
-  "onlyBuiltDependencies": [
-   "@playwright/browser-chromium",
-   "@prisma/engines",
-   "@scarf/scarf",
-   "aws-sdk",
-   "bcrypt",
-   "esbuild",
-   "prisma",
-   "protobufjs",
-   "sharp",
-   "unix-dgram"
-  ]
- }
+  "name": "bulletproof-saa-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bulletproof SaaS Boilerplate",
+  "workspaces": [
+    "client",
+    "server",
+    "e2e"
+  ],
+  "scripts": {
+    "dev:client": "pnpm --filter client run dev",
+    "dev:server": "pnpm --filter server run dev",
+    "dev": "pnpm --parallel run dev:client dev:server",
+    "test:client": "pnpm --filter client run test",
+    "test:server": "pnpm --filter server run test",
+    "test:e2e": "pnpm --filter e2e run test",
+    "build:client": "pnpm --filter client run build",
+    "build:server": "pnpm --filter server run build"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@playwright/browser-chromium",
+      "@prisma/engines",
+      "@scarf/scarf",
+      "aws-sdk",
+      "bcrypt",
+      "esbuild",
+      "prisma",
+      "protobufjs",
+      "sharp",
+      "unix-dgram"
+    ],
+    "overrides": {
+      "prisma": "link:../../../Library/pnpm/global/5/node_modules/prisma"
+    }
+  },
+  "dependencies": {
+    "prisma": "link:../../../Library/pnpm/global/5/node_modules/prisma"
+  }
 }

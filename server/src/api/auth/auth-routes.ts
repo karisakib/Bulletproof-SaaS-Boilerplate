@@ -1,106 +1,73 @@
 import { Router, Request, Response, NextFunction } from "express";
-// import log from "@/utils/logger";
-// import bcrypt from "bcryptjs";
-// import UserModel from "../users/model"
-// import OTPModel from "../otp/model";
-// const { hashData, verifyHashedData } = require("@/utils/hashData");
-// const { authenticateUser } = require("./controller");
-// const auth = require("@/middleware/authMiddleware");
-// import { v4 } from "uuid";
-
-// const sendOTP = require("./controller");
-
-
-
+import { checkSchema } from 'express-validator';
 
 const router: Router = Router();
 
-/**
- * @path /api/v1/auth/register
- * @method get
- * @summary Testing router
- */
-router.get("/register", (req, res) => {
- res.status(200).json({ status: "OK", path: req.baseUrl, message: "working" });
-});
+router.get("/register",
+ checkSchema({
+  firstName: { isAlpha: true, },
+  lastName: { isAlpha: true },
+  email: { isEmail: true },
+  password: { isStrongPassword: true }
+ }),
+ async (req: Request, res: Response) => {
+  res.status(200).json({ status: "OK", path: req.baseUrl, message: "working" });
+ });
 
-// /**
-//  * @path /api/v1/auth/register
-//  * @method post
-//  * @param userId
-//  * @summary creates user and returns status 'ok' or 'error'
-//  */
-// router.post("/register", async (req: Request, res: Response) => {
-//  try {
-//   // Grab required data from the request body
-//   let { firstName, lastName, email, password } = req.body;
-//   firstName = firstName.trim();
-//   lastName = lastName.trim();
-//   email = email.trim();
-//   password = password.trim();
-//   // log.info("Validating user input now!")
 
-//   // Validate if all required data is not empty
-//   if (!firstName || !lastName || !email || !password) {
-//    return res.status(400).json({
-//     error: "First name, last name, email, and password fields are required.",
+// router.post("/register",
+//  checkSchema({
+//   firstName: { isAlpha: true, },
+//   lastName: { isAlpha: true },
+//   email: { isEmail: true },
+//   password: { isStrongPassword: true }
+//  }),
+//  async (req: Request, res: Response) => {
+//   try {
+//    // Grab required data from the request body
+//    let { firstName, lastName, email, password } = req.body;
+//    firstName = firstName.trim();
+//    lastName = lastName.trim();
+//    email = email.trim();
+//    password = password.trim();
+//    // log.info("Validating user input now!")
+
+//    // Validate if all required data is not empty
+//    if (!firstName || !lastName || !email || !password) {
+//     return res.status(400).json({
+//      error: "First name, last name, email, and password fields are required.",
+//     });
+//    }
+
+//    // Hash password once validation is successful
+//    const hashedPassword = await hashData(password);
+
+//    // Create a unique username based on first and last name, e.g. sakibk. If sakibka is taken, then add a number to the end.
+//    const username = `${lastName}${firstName.split("")[0]}`;
+
+//    const newUserData = new UserModel({
+//     firstName,
+//     lastName,
+//     email,
+//     hashedPassword,
 //    });
+
+
+//    // Save user
+//    const createdUserData = await newUserData.save();
+//    console.log(createdUserData);
+//    res.status(201).json({
+//     message: "User registered",
+//     data: createdUserData,
+//    });
+
+//    // Send Email verification (OTP expires in 60 seconds and will need to request a new one)
+
+//    // SMS verification (Twilio API - OTP expires in 60 seconds and will need to request a new one)
+//   } catch (error) {
+//    res.status(500).json({ error: error.message });
 //   }
-
-//   // Check if name passes regex
-//   // if (
-//   //  not !regexPatterns.nameRegex.test(firstName) ||
-//   //  not !regexPatterns.nameRegex.test(lastName)
-//   // ) {
-//   //  res.status(400).json({
-//   //   error: "Names must only contain letters, hyphens, and apostrophes.",
-//   //  });
-//   // }
-
-//   // // Check if email passes regex
-//   // if (!regexPatterns.emailRegex.test(email)) {
-//   //  res.status(400).json({
-//   //   error: "Not a valid email.",
-//   //  });
-//   // }
-
-//   // // Check if password passes regex
-//   // if (!regexPatterns.passwordRegex.test(password)) {
-//   //  res.status(400).json({
-//   //   error:
-//   //    "Password must be 8-16 characters, including letters, digits, and special character from @$!%*?&",
-//   //  });
-//   // }
-
-//   // Hash password once validation is successful
-//   const hashedPassword = await hashData(password);
-
-//   // Create a unique username based on first and last name, e.g. sakibk. If sakibka is taken, then add a number to the end.
-//   const username = `${lastName}${firstName.split("")[0]}`;
-
-//   const newUserData = new UserModel({
-//    firstName,
-//    lastName,
-//    email,
-//    hashedPassword,
-//   });
-
-
-//   // Save user
-//   const createdUserData = await newUserData.save();
-//   console.log(createdUserData);
-//   res.status(201).json({
-//    message: "User registered",
-//    data: createdUserData,
-//   });
-
-//   // Send Email verification (OTP expires in 60 seconds and will need to request a new one)
-
-//   // SMS verification (Twilio API - OTP expires in 60 seconds and will need to request a new one)
-//  } catch (error) {
-//   res.status(500).json({ error: error.message });
-//  }
-// });
+//  });
 
 // /**
 //  * @summary verifies a new user's account registration via email
@@ -306,8 +273,6 @@ router.get("/register", (req, res) => {
 
 const { v4: uuidv4 } = require("uuid");
 
-const express = require("express");
-const router = express.Router();
 // const sendOTP = require("./controller");
 
 
@@ -316,14 +281,14 @@ const router = express.Router();
  * @method post
  */
 router.post("/", async (req, res) => {
-  try {
-   let { email, subject, message, duration } = req.body;
-   res.status(201).json({
-    message: "POST /api/v1/apikey/ working"
-   });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+ try {
+  let { email, subject, message, duration } = req.body;
+  res.status(201).json({
+   message: "POST /api/v1/apikey/ working"
+  });
+ } catch (err) {
+  res.status(400).json({ error: err.message });
+ }
 });
 
 /**
@@ -336,9 +301,9 @@ router.get("/", async (req, res) => {
  try {
   res.status(200).json({
    message: "GET /api/v1/apikey/ working"
-});
+  });
  } catch (error) {
-   res.status(400).json({ error: error.message });
+  res.status(400).json({ error: error.message });
  }
 });
 
@@ -433,9 +398,10 @@ module.exports = router;
 
 
 ////////OTP ROUTES//////////
-import { Router } from "express";
-const { verifyOTP } = require("./controller");
-const router: Router = Router();
+
+
+
+
 // const sendOTP = require("./controller");
 
 // /**

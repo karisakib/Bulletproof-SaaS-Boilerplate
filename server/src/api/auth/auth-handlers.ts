@@ -1,3 +1,29 @@
+import { Request, Response } from "express";
+import { AuthService } from "./auth-services";
+
+export class AuthHandlers {
+ static async register(req: Request, res: Response) {
+  try {
+   const { email, password } = req.body;
+   const user = await AuthService.register(email, password);
+   res.status(201).json({ message: "User created."})
+  } catch (error) {
+   res.status(400).json({ message: error.message })
+  }
+ }
+
+ static async login(req: Request, res: Response) {
+  try {
+   const { email, password } = req.body;
+   const user = await AuthService.login(email, password);
+   res.status(201).json({ message: "User created."})
+  } catch (error) {
+   res.status(400).json({ message: error.message })
+  }
+ }
+
+}
+
 // const OTPModel = require("./model");
 // const { hashData, verifyHashedData } = require("../../../../utils/hashData");
 // const generateOTP = require("../../../../utils/generateOTP");

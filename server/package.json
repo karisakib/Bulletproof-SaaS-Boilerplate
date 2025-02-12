@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "seed-db": "tsx src/db/seed.ts",
     "start-services": "brew services start postgresql mongodb-community redis",
@@ -12,9 +13,10 @@
     "build": "tsc -b",
     "start": "node dist/app.js",
     "prepare": "husky"
-
   },
   "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
@@ -72,7 +74,7 @@
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "pino-pretty": "^13.0.0",
-    "prisma": "^6.3.1",
+    "prisma": "link:../../../../Library/pnpm/global/5/node_modules/prisma",
     "start-server-and-test": "^2.0.10",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
