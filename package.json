@@ -1,0 +1,24 @@
+{
+ "name": "bulletproof-saa-boilerplate",
+ "version": "1.0.0",
+ "private": true,
+ "description": "Bulletproof SaaS Boilerplate",
+ "workspaces": [
+  "client",
+  "server"
+ ],
+ "pnpm": {
+  "onlyBuiltDependencies": [
+   "@playwright/browser-chromium",
+   "@prisma/engines",
+   "@scarf/scarf",
+   "aws-sdk",
+   "bcrypt",
+   "esbuild",
+   "prisma",
+   "protobufjs",
+   "sharp",
+   "unix-dgram"
+  ]
+ }
+}
