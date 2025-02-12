@@ -1,25 +1,18 @@
 {
-  "name": "rapid-apply-backend",
+  "name": "server",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "seed": "tsx src/db/seed/seed.ts",
-    "start:mongo": "brew services start mongodb-community",
-    "start:postgres": "brew services start postgresql",
-    "start:redis": "brew services start redis",
-    "stop:mongo": "brew services stop mongodb-community",
-    "stop:postgres": "brew services stop postgresql",
-    "stop:redis": "brew services stop redis",
-    "start:services": "concurrently \"npm run start:mongo\" \"npm run start:postgres\" \"npm run start:redis\"",
-    "stop:services": "concurrently \"npm run stop:mongo\" \"npm run stop:postgres\" \"npm run stop:redis\"",
-    "start:dev": "npm run start:services && npm run dev",
-    "dev:server": "tsx watch src/index.ts",
-    "dev:client-server": "concurrently \"cd ../client && npm run dev\" \"tsx watch src/index.ts\"",
+    "seed-db": "tsx src/db/seed.ts",
+    "start-services": "brew services start postgresql mongodb-community redis",
+    "stop-services": "brew services stop postgresql mongodb-community redis",
+    "dev": "tsx watch src/index.ts",
     "test:unit": "jest",
-    "test:artillery": "artillery run src/tests/performance/artillery.yml",
-    "build": "tsc --build",
+    "test:load": "artillery run src/tests/performance/artillery.yml",
+    "build": "tsc -b",
     "start": "node dist/app.js",
     "prepare": "husky"
+
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -85,18 +78,5 @@
     "ts-jest": "^29.2.5",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@playwright/browser-chromium",
-      "@prisma/engines",
-      "@scarf/scarf",
-      "aws-sdk",
-      "bcrypt",
-      "esbuild",
-      "prisma",
-      "protobufjs",
-      "unix-dgram"
-    ]
   }
 }

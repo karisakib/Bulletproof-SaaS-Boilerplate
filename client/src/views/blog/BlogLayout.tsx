@@ -1,11 +1,11 @@
-const BlogLayout: React.FC = ({ children }) => {
+const BlogLayout: React.FC = () => {
  return (
   <div>
    <header>
     <h1>Blog</h1>
    </header>
    <main>
-    {children}
+    {/* {children} */}
    </main>
    <footer>
     <p>© 2023 Blog. All rights reserved.</p>

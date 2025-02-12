@@ -5,8 +5,19 @@
  "description": "Bulletproof SaaS Boilerplate",
  "workspaces": [
   "client",
-  "server"
+  "server",
+  "e2e"
  ],
+ "scripts": {
+  "dev:client": "pnpm --filter client run dev",
+  "dev:server": "pnpm --filter server run dev",
+  "dev": "pnpm --parallel run dev:client dev:server",
+  "test:client": "pnpm --filter client run test",
+  "test:server": "pnpm --filter server run test",
+  "test:e2e": "pnpm --filter e2e run test",
+  "build:client": "pnpm --filter client run build",
+  "build:server": "pnpm --filter server run build"
+}, 
  "pnpm": {
   "onlyBuiltDependencies": [
    "@playwright/browser-chromium",

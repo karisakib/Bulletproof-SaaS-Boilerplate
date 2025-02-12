@@ -1,0 +1,1 @@
+// https://amitd.co/code/javascript/strip-trailing-slashes-from-express-requests

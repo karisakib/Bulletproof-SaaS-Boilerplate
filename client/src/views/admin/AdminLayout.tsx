@@ -1,11 +1,11 @@
-const AdminLayout: React.FC = ({ children }) => {
+const AdminLayout: React.FC = () => {
  return (
   <div>
    <header>
     <h1>Admin Panel</h1>
    </header>
    <main>
-    {children}
+    {/* {children} */}
    </main>
    <footer>
     <p>© 2023 Your Company</p>
