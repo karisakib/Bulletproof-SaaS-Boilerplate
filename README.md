@@ -10,49 +10,35 @@ The **Bulletproof SaaS Boilerplate** is a fully scalable, production-grade found
 
 ## Tech Stack
 
-| Technology           | Purpose                        | Category                |
-| -------------------- | ------------------------------ | ----------------------- |
-| **React**            | UI Framework                   | Frontend                |
-| **TailwindCSS**      | Styling                        | Frontend                |
-| **Zustand**          | State Management               | Frontend                |
-| **React Router 7**   | Navigation                     | Frontend                |
-| **React Query**      | Data Fetching                  | Frontend                |
-| **Express.js**       | Server Framework               | Backend                 |
-| **Prisma**           | ORM for MongoDB & PostgreSQL   | Backend                 |
-| **Redis**            | Caching                        | Backend                 |
-| **Stripe**           | Payments                       | Backend                 |
-| **Swagger Docs**     | API Documentation              | Backend                 |
-| **Jest & Supertest** | Testing                        | Backend                 |
-| **Playwright**       | E2E Testing                    | Backend                 |
-| **PostHog**          | Analytics & Event Tracking     | Backend                 |
-| **PM2**              | Process Management             | Backend                 |
-| **Docker**           | Containerization               | Infrastructure & DevOps |
-| **GitHub Actions**   | CI/CD Pipeline                 | Infrastructure & DevOps |
-| **AWS S3**           | File Storage                   | Infrastructure & DevOps |
-| **Mailgun**          | Transactional Emails           | Infrastructure & DevOps |
-| **Twilio**           | SMS & Communication            | Infrastructure & DevOps |
-| **BunnyCDN**         | Content Delivery Network (CDN) | Infrastructure & DevOps |
+![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-000000?logo=react&logoColor=white) ![React Router](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=white) ![React Query](https://img.shields.io/badge/React%20Query-FF4154?logo=reactquery&logoColor=white) ![Express.js](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white) ![Stripe](https://img.shields.io/badge/Stripe-008CDD?logo=stripe&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black) ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white) ![Playwright](https://img.shields.io/badge/Playwright-45BA6B?logo=microsoftedge&logoColor=white) ![PostHog](https://img.shields.io/badge/PostHog-FE4370?logo=posthog&logoColor=white) ![PM2](https://img.shields.io/badge/PM2-2B037A?logo=pm2&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white) ![AWS S3](https://img.shields.io/badge/AWS%20S3-569A31?logo=amazons3&logoColor=white) ![Mailgun](https://img.shields.io/badge/Mailgun-F06A33?logo=mailgun&logoColor=white) ![Twilio](https://img.shields.io/badge/Twilio-F22F46?logo=twilio&logoColor=white) ![BunnyCDN](https://img.shields.io/badge/BunnyCDN-FF914D?logo=bunnycdn&logoColor=white) ![Mongoose](https://img.shields.io/badge/Mongoose-880000?logo=mongoose&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) ![Testing Library](https://img.shields.io/badge/Testing%20Library-E33332?logo=testinglibrary&logoColor=white) ![Cloudinary](https://img.shields.io/badge/Cloudinary-F38020?logo=cloudinary&logoColor=white) ![JSON Web Tokens](https://img.shields.io/badge/JSON%20Web%20Tokens-000000?logo=jsonwebtokens&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white) ![MDX](https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=white) ![Immer](https://img.shields.io/badge/Immer-00DC82?logo=immer&logoColor=white)
 
-## Features Overview
+## Database Use Cases
 
-| Feature                    | Description                                                                     | Category |
-| -------------------------- | ------------------------------------------------------------------------------- | -------- |
-| **Admin Dashboard**        | View MMR and other income metrics, superuser features accessible only to admins | Frontend |
-| **Superuser Registration** | Registration for users with superuser permissions under admin level             | Frontend |
-| **Blog Entry Portal**      | Allows publishing of blog entries                                               | Frontend |
-| **Authentication**         | Supports U/P, OAuth, OTP, RBAC, and API Key Provisioning                        | Backend  |
-| **Database**               | Uses PostgreSQL, MongoDB, and Redis                                             | Backend  |
-| **Logging**                | Implements dev, stage, and production logging                                   | Backend  |
-| **CDN**                    | BunnyCDN integration for optimized content delivery                             | Backend  |
-| **Payments**               | Stripe integration for secure transactions                                      | Backend  |
-| **SMS**                    | Twilio for SMS communication                                                    | Backend  |
-| **Transactional Emails**   | Mailgun for sending transactional emails                                        | Backend  |
-| **Testing**                | Playwright API test suite for comprehensive backend testing                     | Backend  |
-| **Deployment**             | PM2 for efficient process management                                            | Backend  |
-| **Containerization**       | Entire application dockerized for portability                                   | Backend  |
-| **CI/CD**                  | GitHub Actions configured for automated deployment workflows                    | Backend  |
+🔹 Use PostgreSQL for:
+✅ User Accounts – Emails, passwords (hashed), usernames
+✅ Authentication & Authorization – Roles, permissions
+✅ Subscriptions & Payments – Stripe/PayPal integration
+✅ Orders & Transactions – E-commerce, invoices
+✅ Relationships between data – Users & orders, followers, etc.
+✅ Reports & Analytics – If data is structured and relational
+
+🔹 Use MongoDB for:
+✅ User Activity Logs – Tracking user logins, errors, analytics
+✅ Audit Logs – Storing system events (e.g., password changes)
+✅ CMS / Blog Content – Storing articles, comments, etc.
+✅ Product Catalog – E-commerce product listings
+✅ Notifications / Messages – Storing chat messages, in-app notifications
+✅ IoT / Sensor Data – When real-time, unstructured data is needed
+
+🔹 Use Redis for:
+✅ Session Management – Store user sessions, login tokens
+✅ Caching – Cache frequently accessed API responses
+✅ Rate Limiting – Prevent abuse by limiting API requests
+✅ Leaderboard / Ranking Systems – Store real-time game scores
+✅ Background Jobs / Queues – Use with BullMQ to manage tasks
 
 ## `views` structure
+
 ```plaintext
 views/
 ├── auth/
@@ -63,58 +49,29 @@ views/
 │   ├── authRoutes.tsx       # Routes for authentication
 ```
 
-## Code Standards
-```javascript
-// Constacts: All caps
-const CACHE_CONTROL_HEADER = 'public, max-age=300'
-
-// Functions and variables: camelCase
-const createUserHandler = (req, res) => {}
-
-// Classes and Models: PascalCase
-class AppError extends Error {}
-
-//Files and folders: kebab-case
-// *-routes.js
-// *-handlers.js
-```
-
 ## Hierarchical Config
 
 Use hierarchical config to organize environment variables by different environments
 
 ```javascript
 const config = {
-  environment: process.env.NODE_ENV,
-  port: process.env.PORT,
-}
+ environment: process.env.NODE_ENV,
+ port: process.env.PORT,
+};
 
 // 👎 The object name already holds the context
 const user = {
-  userName: '...',
-  userEmail: '...',
-  userAddress: '...',
-}
+ userName: "...",
+ userEmail: "...",
+ userAddress: "...",
+};
 
 // 👍 Remove the unnecessary prefix
 const user = {
-  name: '...',
-  email: '...',
-  address: '...',
-}
-
-const config = {
-  storage: {
-    bucketName: process.env.S3_BUCKET_NAME,
-  },
-  database: {
-    name: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-  },
-}
-
-export default config
+ name: "...",
+ email: "...",
+ address: "...",
+};
 ```
 
 ## Performance Notes:
@@ -673,48 +630,39 @@ E.g. Using “fields” query parameter for selected fields to be included in th
 
 CORS relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request.
 
-
 ## Guide To Testing The Backend
-
 
 If short on time, prefer integration tests over unit tests because it covers logical workflows ands business logic
 
 Unit test the business logic which is under your control.
 
-
 Follow the Arrange-Act-Assert pattern in testing.
 
 ```javascript
-describe('User Service', () => {
-  it('Should create a user given correct data', async () => {
-    // 1. Arrange - prepare the data, create any objects you need
-    const mockUser = {
-      // ...
-    }
-    const userService = createUserService(
-      mockLogger,
-      mockQueryBuilder
-    )
+describe("User Service", () => {
+ it("Should create a user given correct data", async () => {
+  // 1. Arrange - prepare the data, create any objects you need
+  const mockUser = {
+   // ...
+  };
+  const userService = createUserService(mockLogger, mockQueryBuilder);
 
-    // 2. Act - execute the logic that you're testing
-    const result = userService.create(mockUser)
+  // 2. Act - execute the logic that you're testing
+  const result = userService.create(mockUser);
 
-    // 3. Assert - validate the expected result
-    expect(mockLogger).toHaveBeenCalled()
-    expect(mockQueryBuilder).toHaveBeenCalled()
-    expect(result).toEqual(/** ... */)
-  })
-})
+  // 3. Assert - validate the expected result
+  expect(mockLogger).toHaveBeenCalled();
+  expect(mockQueryBuilder).toHaveBeenCalled();
+  expect(result).toEqual(/** ... */);
+ });
+});
 ```
 
-* Use Artillery for stress testing
-* Create test users to test permissions
-* Create test users to test authentication
-* Create test users to test api resources
-* Give test user names and personalities
-
-
-
+- Use Artillery for stress testing
+- Create test users to test permissions
+- Create test users to test authentication
+- Create test users to test api resources
+- Give test user names and personalities
 
 ## Users ER Diagram
 
@@ -858,36 +806,36 @@ erDiagram
     UserPayments ||--|| Users : "belongs to"
 ```
 
-
 ## Demo and POC Best Practices
+
 1. Use JSON with readFileStream to mock RestAPI calls.
 2. Build on the product backend and business functions until solidified.
 3. Only move from hard coded backend when mock exemplifies product very closely.
 
-
 ## Pressing Questions
-* What are the helmet.js configs for public facing API's?
-* What are the helmet.js configs for internal API's?
-* What is the best way to implement role-based security (aka RBAC)?
-* Should I create a separate table/ collection for roles/ permissions?
-* What are the different types of user roles my app needs?
-* What is the recommended System Inactivity Timeout before system logs user out?
-* What is the difference between a user role and a security profile?
-* How much user login history should be kept?
-* What integration can we use for SAML (Security Assertion Markup Language)? 
-* What integration can we use for SSO (Single Sign On)?
-* How to implement OAuth 2.0?
-* How to integrate Auth0 by Okta?
-* How to integrate GitHub sign up / login ?
-* How to integrate Apple sign up / login ?
-* How to integrate Google sign up / login ?
-* How to integrate Facebook sign up / login ?
-* How to implement API Key authorization?
 
-
+- What are the helmet.js configs for public facing API's?
+- What are the helmet.js configs for internal API's?
+- What is the best way to implement role-based security (aka RBAC)?
+- Should I create a separate table/ collection for roles/ permissions?
+- What are the different types of user roles my app needs?
+- What is the recommended System Inactivity Timeout before system logs user out?
+- What is the difference between a user role and a security profile?
+- How much user login history should be kept?
+- What integration can we use for SAML (Security Assertion Markup Language)?
+- What integration can we use for SSO (Single Sign On)?
+- How to implement OAuth 2.0?
+- How to integrate Auth0 by Okta?
+- How to integrate GitHub sign up / login ?
+- How to integrate Apple sign up / login ?
+- How to integrate Google sign up / login ?
+- How to integrate Facebook sign up / login ?
+- How to implement API Key authorization?
 
 ## Developer API's and SDK's:
+
 ---
+
 - Provide developers a client side SDK for your API. These code packages are designed to help developers get up and running quickly with their projects by simplifying some of the transactional layers and setup of an application.
 
 - Ido Green, developer advocate at Google, on what makes an API good: “The API should enable developers to do one thing really well. It’s not as easy as it sounds, and you want to be clear on what the API is not going to do as well.”
@@ -905,6 +853,7 @@ erDiagram
 - Another best practice for designing APIs is making troubleshooting easy for developers. This can be done through returning meaningful errors as well as by building tooling. Providing these errors with details leads to a better developer experience. Error codes that are machine-readable strings allow developers to programmatically handle errors in their code bases.
 
 ---
+
 When deprecating an API or an endpoint, add release notes to indicate deprecation.
 
 Documentations should always provide sample code.
@@ -913,8 +862,8 @@ The API and the documentation both should be easy to understand.
 
 The API should have a good SDK in multiple languages.
 
-The API should be easy to test.
----
+## The API should be easy to test.
+
 Building a successful API is an art, comprising business analysis, technology architecture, software development, partnership, content writing, developer relations, support, and marketing.
 
 Validate your API with real users; ask your developers for constant feedback; be transparent with your changes, policies, rate limits, and updates; and be a member of your own developer community.
@@ -922,8 +871,6 @@ Validate your API with real users; ask your developers for constant feedback; be
 After you unlock the product-market fit for your API and foster a developer ecosystem around it, you will experience magic—developers will use your API to innovate, empower amazing new solutions, and build things you didn’t think were possible.
 
 There is no better feeling than building something that millions of people use every day to make their lives better. Trust us, we have done that, and you can, too.
-
-
 
 ## To ensure scalability as your application grows
 
@@ -942,6 +889,7 @@ Purpose: The /utils (short for "utilities") folder typically contains small, reu
 Scope: Utilities are often project-specific and are designed to be used within the context of a single project. They are usually lightweight and focused on specific tasks that don’t necessarily belong to any single module or component.
 
 Examples:
+
 - Functions for formatting dates or numbers.
 - String manipulation utilities.
 - Basic validation functions.
@@ -949,11 +897,13 @@ Examples:
 
 ```javascript
 function formatDate(date) {
-    return new Intl.DateTimeFormat('en-US').format(date);
+ return new Intl.DateTimeFormat("en-US").format(date);
 }
 
 function generateRandomString(length) {
-    return Math.random().toString(36).substring(2, length + 2);
+ return Math.random()
+  .toString(36)
+  .substring(2, length + 2);
 }
 ```
 
@@ -964,6 +914,7 @@ Purpose: The /lib (short for "library") folder typically contains larger, more c
 Scope: Code in /lib is often more general-purpose and could potentially be extracted into its own package or module for reuse across different projects. These libraries might include custom implementations of significant functionality like API clients, database wrappers, or even more substantial utilities that don’t fit the narrow, helper-focused nature of /utils.
 
 ##### Summary of Differences:
+
 - Size and Complexity:
   - /utils functions are generally small, simple, and focused on specific tasks.
   - /lib modules are often larger and more complex, potentially encompassing a broader range of functionality.
@@ -981,4 +932,3 @@ You might also have a default.js file with default settings that apply across al
 You may also have a .env file for storing environment variables. These are typically loaded using a package like dotenv.
 
 Configuration settings for connecting to databases, including connection strings, credentials, and other related options.
-
