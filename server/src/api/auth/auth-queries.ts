@@ -9,7 +9,7 @@ export class AuthQueries {
   return prisma.user.findUnique({ where: { email } });
  }
 
- static async createUser(email: string, hash: string) {
-  return prisma.user.create({ data: { email, hash } });
+ static async createUser(email: string, hash: string, subscription: string) {
+  return prisma.user.create({ data: { email, hash, subscription } });
  }
 }

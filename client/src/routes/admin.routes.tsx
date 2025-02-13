@@ -1,5 +1,6 @@
-// export const ADMIN_ROUTES = {
-//  ADMIN_HOME: '/admin',
-//  USERS: '/admin/users',
-//  SETTINGS: '/admin/settings',
-// };
+import { RouteObject } from "react-router";
+import AdminLayout from "../views/admin/AdminLayout";
+
+export const ADMIN_ROUTES: RouteObject[] = [
+ { path: "admin", element: <AdminLayout/> },
+];

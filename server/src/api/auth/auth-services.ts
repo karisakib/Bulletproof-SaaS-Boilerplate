@@ -3,12 +3,13 @@ import bcrypt from "bcrypt";
 
 export class AuthService {
  // Register a new user
- static async register(email: string, password: string) {
+ static async register(email: string, password: string, subscription: string) {
   const existingUser = await AuthQueries.findByEmail(email);
   if (existingUser) throw new Error("User already exists");
-
-  const hash = await bcrypt.hash(password, 4);
-  return AuthQueries.createUser(email, hash);
+  if (existingUser==null || existingUser == undefined) {
+   const hash = await bcrypt.hash(password, 4);
+   return AuthQueries.createUser(email, hash, subscription);
+  }
  }
 
  static async login(email: string, password: string) {
@@ -20,5 +21,10 @@ export class AuthService {
 
   return { message: "Login successful", email: user.email };
  }
+
+ static async sendWelcomeEmail(email: string) {
+
+ }
+
 
 }

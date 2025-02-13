@@ -31,9 +31,7 @@
       "sharp",
       "unix-dgram"
     ],
-    "overrides": {
-      "prisma": "link:../../../Library/pnpm/global/5/node_modules/prisma"
-    }
+    "overrides": {}
   },
   "dependencies": {
     "prisma": "link:../../../Library/pnpm/global/5/node_modules/prisma"

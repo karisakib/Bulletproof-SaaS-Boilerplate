@@ -1,14 +1,60 @@
-// Financial Accounting Routes
 import { Router, Request, Response } from "express";
 const router: Router = Router();
-const { getFinancialSummary } = require("./controller")
+
+/**
+ * This domain is dedicated to all types of reports
+ * Whether it be financial, user, or system reports
+*/
+
+// Health Check
+router.get("/health", async (req: Request, res: Response) => {
+ res
+  .status(200)
+  .json({ status: "OK", message: "working" });
+})
+
+// User Activity Reports: GET /admin/reports/user-activity
+router.get("/user-activity", (req: Request, res: Response) => {
+ res.status(200).json({
+  status: "OK",
+  path: req.baseUrl,
+  message: "working"
+ })
+});
+
+// System Performance Reports: GET /admin/reports/system-performance
+router.get("/system-performance", (req: Request, res: Response) => {
+ res.status(200).json({
+  status: "OK",
+  path: req.baseUrl,
+  message: "working"
+ })
+});
+
+// View Audit Logs: GET /admin/reports/logs/audit
+router.get("/logs/audit", (req: Request, res: Response) => {
+ res.status(200).json({
+  status: "OK",
+  path: req.baseUrl,
+  message: "working"
+ })
+});
+
+router.use("*", (req: Request, res: Response) => {
+ res.status(404).json({
+  error: "Not Found",
+  message: `The requested resource '${req.originalUrl}' was not found.`
+ })
+});
+
+
 /**
  * @path /api/v1/financial/summary
  * @method get
  * @param
  * @summary returns financial summary of SaaS app and KPIs
  */
-router.get("/summary", getFinancialSummary);
+// router.get("/summary", getFinancialSummary);
 
 
 // Financial Management:
@@ -78,6 +124,5 @@ router.put("/financial/subscriptions/:subscriptionId", (req: Request, res: Respo
  })
 });
 
-module.exports = router;
 
 export default router

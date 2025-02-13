@@ -1,5 +1,4 @@
 import request, { Response } from 'supertest';
-import { Express } from 'express';
 import app from "../src/server";
 // https://www.freecodecamp.org/news/how-to-test-in-express-and-mongoose-apps/
 // https://github.com/porsager/postgres?tab=readme-ov-file
@@ -26,19 +25,19 @@ describe('Home Endpoint', () => {
 
 // describe('User Service', () => {
 //  it('Should create a user given correct data', async () => {
-//   // 1. Arrange - prepare the data, create any objects you need
+// 1. Arrange - prepare the data, create any objects you need
 //    const mockUser = {
-//      // ...
+// ...
 //    }
 //    const userService = createUserService(
 //      mockLogger,
 //      mockQueryBuilder
 //    )
 
-//    // 2. Act - execute the logic that you're testing
+// 2. Act - execute the logic that you're testing
 //    const result = userService.create(mockUser)
 
-//    // 3. Assert - validate the expected result
+// 3. Assert - validate the expected result
 //    expect(mockLogger).toHaveBeenCalled()
 //    expect(mockQueryBuilder).toHaveBeenCalled()
 //    expect(result).toEqual(/** ... */)

@@ -1,19 +1,119 @@
-import { Router, Request, Response, NextFunction } from "express";
-import { checkSchema } from 'express-validator';
-
+import { Router, Request, Response } from "express";
+import { checkSchema, validationResult } from "express-validator";
+import { authSchemas } from "./auth-schemas";
+import { AuthHandlers } from "./auth-handlers";
 const router: Router = Router();
 
-router.get("/register",
- checkSchema({
-  firstName: { isAlpha: true, },
-  lastName: { isAlpha: true },
-  email: { isEmail: true },
-  password: { isStrongPassword: true }
- }),
- async (req: Request, res: Response) => {
-  res.status(200).json({ status: "OK", path: req.baseUrl, message: "working" });
+// Register
+// router.post("/register",
+//  checkSchema(authSchemas.register),
+//  async (req: Request, res: Response): Promise<void> => {
+//   const errors = validationResult(req);
+
+//   if (!errors.isEmpty()) {
+//    res.status(400).json({ status: "ERROR", errors: errors.array() });
+//    return;
+//   }
+
+//   res.status(201).json({
+//    status: "OK",
+//    message: "working",
+//    data: []
+//   });
+//  });
+
+router.post("/register",
+  checkSchema(authSchemas.register), AuthHandlers.register);
+
+
+  // async (req: Request, res: Response): Promise<void> => {
+  //  const errors = validationResult(req);
+ 
+  //  if (!errors.isEmpty()) {
+  //   res.status(400).json({ status: "ERROR", errors: errors.array() });
+  //   return;
+  //  }
+ 
+  //  res.status(201).json({
+  //   status: "OK",
+  //   message: "working",
+  //   data: []
+  //  });
+  // });
+
+
+// Login
+router.post("/login",
+ checkSchema(authSchemas.login),
+ async (req: Request, res: Response): Promise<void> => {
+
+  const testAccount = {
+   email: "user@bs.com",
+   password: "password"
+  }
+
+  const { email, password } = req.body;
+
+  if (email == testAccount.email && password == testAccount.password) {
+   res.json({
+    status: "OK",
+    message: "User logged in",
+    data: []
+   });
+  }
+
  });
 
+// Logout
+router.post("/logout", async (req: Request, res: Response) => {
+ res.status(204).json({ status: "OK", message: "User logged out", data: [] });
+}
+);
+
+// Forgot Password
+router.post("/forgot-password",
+ checkSchema(authSchemas.forgotPassword),
+ async (req: Request, res: Response) => {
+  res.json({ status: "OK", message: "Requesting password update", data: [] });
+ });
+
+// Reset Password
+router.post("/reset-password",
+ checkSchema(authSchemas.resetPassword),
+ async (req: Request, res: Response) => {
+  res.json({ status: "OK", message: "User password is reset", data: [] });
+ });
+
+// OTP
+router.post("/otp/:userId",
+ checkSchema(authSchemas.otp),
+ async (req: Request, res: Response) => {
+ res.json({ status: "OK", message: "Create and email generated OTP for userId" });
+});
+
+router.get("/otp/:userId", 
+ checkSchema(authSchemas.otp),
+ async (req: Request, res: Response) => {
+ res.json({ status: "OK", message: "Get generated OTP for userId" });
+});
+
+// API Key
+router.post("/api-key/:userId", (req: Request, res: Response) => {
+ res.json({ status: "OK", message: "working" });
+});
+
+router.get("/api-key/:userId", (req: Request, res: Response) => {
+ res.json({ status: "OK", message: "working" });
+});
+
+router.use("*", (req: Request, res: Response) => {
+ res.status(404).json({
+  error: "Not Found",
+  message: `The requested resource '${req.originalUrl}' with method '${req.method}' was not found.`
+ })
+});
+
+export default router
 
 // router.post("/register",
 //  checkSchema({
@@ -217,70 +317,10 @@ router.get("/register",
 // });
 
 
-// router.patch("/deactivate", async (req, res) => {
-//  try {
-//   const { email } = req.body;
-//   //
-//   res.status(202).json({
-//    status: "ok",
-//    message: `User account with ${email} deactivated`,
-//   });
-//  } catch (err) {
-//   // log.error(`Error deactivating user account with email ${email}`);
-//   res.status(500).json({ error: err.message });
-//  }
-// });
+// API KEY ROUTES - Admin
 
-// router.patch("/reactivate", async (req, res) => {
-//  try {
-//   const { email } = req.body;
-//   //
-//   res.status(202).json({
-//    status: "ok",
-//    message: `User account with ${email} reactivated`,
-//   });
-//  } catch (err) {
-//   // log.error(`Error reactivating user account with email ${email}`);
-//   res.status(500).json({ error: err.message });
-//  }
-// });
-
-// router.delete("/delete", async (req: Request, res: Response) => {
-//  try {
-//   const { email } = req.body;
-//   // Optionally confirm deletion with the user first
-//   // e.g., by sending a confirmation email or showing a confirmation page
-//   // Ensure that the user is authenticated and authorized to delete their account.
-//   // Consider cleaning up related data, such as posts, comments, sessions, and tokens.
-//   // If needed, implement a soft delete mechanism by marking the user as deleted rather than removing them from the database.
-//   // Properly handle errors and edge cases, such as attempting to delete a non-existent user.
-//   // Or you can mark user as deleted but keep all their data
-//   res.status(204).json({
-//    status: "ok",
-//    message: `User account with ${email} suspended`,
-//   });
-//  } catch (err) {
-//   // log.error(`Error deleting user account with email ${email}`);
-//   res.status(500).json({ error: err.message });
-//  }
-// });
-
-// module.exports = router;
-
-
-
-//////////////// API KEY ROUTES //////////////////////
-
-const { v4: uuidv4 } = require("uuid");
-
-// const sendOTP = require("./controller");
-
-
-/**
- * @path /api/v1/apikey/
- * @method post
- */
-router.post("/", async (req, res) => {
+// Create an Api Key for a user
+router.post("/api-key/create", async (req, res) => {
  try {
   let { email, subject, message, duration } = req.body;
   res.status(201).json({
@@ -291,53 +331,41 @@ router.post("/", async (req, res) => {
  }
 });
 
-/**
- * @path /api/v1/apikey/
- * @method get
- * @param userId
- * @summary returns stats for user given userId
- */
-router.get("/", async (req, res) => {
+// Delete an Api Key for a user
+router.post("/api-key/create", async (req, res) => {
  try {
-  res.status(200).json({
-   message: "GET /api/v1/apikey/ working"
-  });
- } catch (error) {
-  res.status(400).json({ error: error.message });
- }
-});
-
-
-/**
- * @path /api/v1/apikey/create
- * @method post
- * @param userId
- * @summary returns a newly created api key
- */
-router.post("/create", async (req, res) => {
- let { email } = req.body;
- email = email.trim();
- const generatedApiKey = uuidv4();
- console.log(generatedApiKey);
- try {
-  const newApiKeyData = new ApiKeyModel({ email, generatedApiKey });
-  const savedApiKeyData = await newApiKeyData.save();
-  console.log(savedApiKeyData);
+  let { email, subject, message, duration } = req.body;
   res.status(201).json({
-   message: `API KEY: ${generatedApiKey} created for user with email: ${email}`
+   message: "POST /api/v1/apikey/ working"
   });
- } catch (error) {
-  res.status(400).json({ error: error.message });
+ } catch (err) {
+  res.status(400).json({ error: err.message });
  }
 });
 
 
-/**
- * @path /api/v1/apikey/:userId
- * @method get
- * @param userId
- * @summary returns a newly created api key based on userId
- */
+
+
+// returns a newly created api key
+// router.post("/create", async (req, res) => {
+//  let { email } = req.body;
+//  email = email.trim();
+//  const generatedApiKey = uuidv4();
+//  console.log(generatedApiKey);
+//  try {
+//   const newApiKeyData = new ApiKeyModel({ email, generatedApiKey });
+//   const savedApiKeyData = await newApiKeyData.save();
+//   console.log(savedApiKeyData);
+//   res.status(201).json({
+//    message: `API KEY: ${generatedApiKey} created for user with email: ${email}`
+//   });
+//  } catch (error) {
+//   res.status(400).json({ error: error.message });
+//  }
+// });
+
+
+// Returns a newly created api key based on userId
 // router.get("/:userId", async (req, res) => {
 //  let { email } = req.body;
 //  email = email.trim();
@@ -356,16 +384,10 @@ router.post("/create", async (req, res) => {
 // });
 
 
-
-
-
-module.exports = router;
-
-
-// // Testing user login
+// Testing user login
 // router.post("/login", async (req: Request, res: Response) => {
 //  try {
-//   // Get req.body data from client
+// Get req.body data from client
 //   let { email, password } = req.body;
 //   email = email.trim();
 //   password = password.trim();
@@ -397,20 +419,10 @@ module.exports = router;
 
 
 
-////////OTP ROUTES//////////
+// OTP ROUTES
 
-
-
-
-// const sendOTP = require("./controller");
-
-// /**
-//  * @path /api/v1/otp/verify
-//  * @method post
-//  * @param 
-//  * @summary verifies otp sent to user's email
-//  */
-// router.post("/verify", async (req, res) => {
+// verifies otp sent to user's email
+// router.post("/otp/verify", async (req, res) => {
 //  try {
 //   let { email, otp } = req.body;
 //   const validOTP = await verifyOTP({ email, otp });
@@ -420,27 +432,20 @@ module.exports = router;
 //  }
 // });
 
-// /**
-//  * @path /api/v1/otp/
-//  * @method post
-//  * @param 
-//  * @summary creates and sends otp to user's email for verification
-//  */
-// router.post("/", async (req, res) => {
+// creates and sends otp to user's email for verification
+// router.post("/otp", async (req, res) => {
 //  try {
 //   let { email, subject, message, duration } = req.body;
 
-//   // const createdOTP = await sendOTP({
-//   //  email,
-//   //  subject,
-//   //  message,
-//   //  duration
-//   // })
+// const createdOTP = await sendOTP({
+//  email,
+//  subject,
+//  message,
+//  duration
+// })
 
 //   res.status(201).json(createdOTP);
 //  } catch (err) {
 //   res.status(500).json({ error: err.message });
 //  }
 // });
-
-// module.exports = router;

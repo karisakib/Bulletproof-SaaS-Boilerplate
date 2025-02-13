@@ -27,22 +27,22 @@
     /* Modules */
     "module": "NodeNext",                                /* Specify what module code is generated. */
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
-    // "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
+    // "moduleResolution": "nodenext",                     /* Specify how TypeScript looks up a file from a given module specifier. */
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
      "@/*": ["src/*"],
      "@api/*": ["src/api"],
-     "@v1/*": ["src/api/v1"],
-     "@admin/*": ["src/api/admin"],
-     "@auth/*": ["src/api/v1/auth"],
-     "@users/*": ["src/api/users"],
+     "@api-auth/*": ["src/api/auth"],
+     "@api-content/*": ["src/api/content"],
+     "@api-payments/*": ["src/api/payments"],
+     "@api-reports/*": ["src/api/reports"],
+     "@api-settings/*": ["src/api/settings"],
+     "@api-support/*": ["src/api/support"],
      "@config/*": ["src/config"],
      "@interface/*": ["src/types"],
      "@lib/*": ["src/lib"],
      "@middleware/*": ["src/middleware"],
      "@models/*": ["src/models"],
-     "@routes/*": ["src/routes"],
-     "@sql/*": ["src/db/sql"],
      "@temp/*": ["src/temp"],
      "@utils/*": ["src/utils"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

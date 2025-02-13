@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
 
 const connectToMongoDB = async () => {
  try {
