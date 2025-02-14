@@ -25,6 +25,4 @@ export class AuthService {
  static async sendWelcomeEmail(email: string) {
 
  }
-
-
 }

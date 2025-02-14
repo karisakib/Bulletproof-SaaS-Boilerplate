@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { AuthService } from "./auth-services";
-import { subscribe } from "diagnostics_channel";
 
 export class AuthHandlers {
  static async register(req: Request, res: Response) {
@@ -22,7 +21,6 @@ export class AuthHandlers {
    res.status(400).json({ message: error.message })
   }
  }
-
 }
 
 // const OTPModel = require("./model");
