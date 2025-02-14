@@ -1,9 +1,11 @@
 import app from "./server"
-import config from "../src/config/config"
+import appConfig from "@config/config";
 // import { logger } from "./utils/logger"
 
+
 // Start Express App
-app.listen(config.port, () => {
- // logger.info(`App running on port http://localhost:${config.dev.port}`, {})
- console.log(`App running on http://localhost:${config.port}`);
+app.listen(appConfig.port, () => {
+ // logger.info(`App running on port http://localhost:${appConfig.dev.port}`, {})
+ console.log(appConfig.env);
+ console.log(`App running on http://localhost:${appConfig.port}`);
 });

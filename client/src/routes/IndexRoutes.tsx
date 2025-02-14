@@ -1,9 +1,9 @@
 import { RouteObject } from "react-router";
-import { LANDING_ROUTES } from './landing.routes';
+import { LANDING_ROUTES } from './LandingRoutes';
 // import { AUTH_ROUTES } from './auth.routes';
-import { ADMIN_ROUTES } from './admin.routes';
+import { ADMIN_ROUTES } from './AdminRoutes';
 // import { BLOG_ROUTES } from "./blog.routes";
-import { LEGAL_ROUTES } from "./legal.routes";
+import { LEGAL_ROUTES } from "./LegalRoutes";
 
 
 export const routes: RouteObject[] = [

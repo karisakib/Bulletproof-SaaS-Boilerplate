@@ -1,35 +1,33 @@
-require("dotenv").config();
+import { config } from "dotenv";
 import fs from "fs";
-const createError = require("http-errors"); // TODO: Convert to ESM import
-import express, { Express, Request, Response, NextFunction } from "express";
 import path from "path";
-const cors = require("cors"); // TODO: Delete CJS import
-const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
+import express, { Express, Request, Response, NextFunction } from "express";
+import createHttpError from "http-errors";
+import cors from "cors";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize"
+import rateLimit from "express-rate-limit";
+import morgan from "morgan";
+import swaggerUi from "swagger-ui-express"
+import YAML from "yaml"
 const { xss } = require("express-xss-sanitizer");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
 const responseTime = require("response-time");
 const compression = require("compression");
-const morgan = require("morgan");
-const swaggerUi = require("swagger-ui-express"); // TODO: Delete CJS import
-// import { SwaggerOptions } from "swagger-ui-express";
-const YAML = require("yaml");
-
 // Utility imports
-import config from "./config/config";
+import appConfig from "@config/config";
 
 // Logging imports
 // const { logger } = require("./utils/logger.js");
 
-// Database imports
-// import mongo from "./config/mongo";
 
 // Router imports
 import router from "./api/index"
 
 // Swagger docs import
 // const swaggerDocument = require("./swagger.json")
+config();
 const file = fs.readFileSync("./swagger.yml", "utf8");
 const swaggerDocument = YAML.parse(file);
 
@@ -56,7 +54,7 @@ app.use(morgan("dev"));
 //      responseTime: message.split(" ")[3],
 //      label: "http-response",
 //     };
-//     // logger.info(JSON.stringify(logObject), { });
+//    logger.info(JSON.stringify(logObject), { });
 //    },
 //   },
 //  })
@@ -72,20 +70,10 @@ app.use(hpp());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Cache Static Files Efficiently Ensures better load speeds and reusability
-app.use(express.static(path.join(__dirname, "../public"), { maxAge: "1y" }));
-app.use(compression());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api", router);
 // 404 Error Middleware - For API Routes Only (Not React Frontend)
-app.use("/api/*", (req: Request, res: Response, next: NextFunction) => {
- // next(createError(404, "API route not found"));
- res.status(404).json({
-  status: "error",
-  message: "Not Found",
- });
-});
 
 // Global Error Handler Middleware (Handles All Errors)
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -98,9 +86,9 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
  });
 });
 
-
 // Serve static assets from the correct folder
 app.use(express.static(path.join(__dirname, "../../client/dist"), { maxAge: "1y" }));
+app.use(compression());
 
 // Ensure CSS, JS, and other assets are correctly served
 app.use("/assets", express.static(path.join(__dirname, "../../client/dist/assets")));

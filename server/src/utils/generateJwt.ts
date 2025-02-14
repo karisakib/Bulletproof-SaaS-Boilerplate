@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken"
 
 const { JWT_KEY, JWT_EXPIRY } = process.env;
 
-const generateJwt = async (
+export const generateJwt = async (
   tokenData,
   tokenKey = JWT_KEY,
   expiresIn = JWT_EXPIRY
@@ -14,5 +14,3 @@ const generateJwt = async (
     throw Error("Error signing JWT.");
   }
 };
-
-module.exports = generateJwt;

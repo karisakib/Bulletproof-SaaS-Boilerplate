@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { AuthService } from "./auth-services";
+import { subscribe } from "diagnostics_channel";
 
 export class AuthHandlers {
  static async register(req: Request, res: Response) {
   try {
    const { email, password } = req.body;
-   const user = await AuthService.register(email, password);
+   const user = await AuthService.register(email, password, subscription);
    res.status(201).json({ message: "User created."})
   } catch (error) {
    res.status(400).json({ message: error.message })

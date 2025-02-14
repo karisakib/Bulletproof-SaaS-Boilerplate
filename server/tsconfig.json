@@ -31,20 +31,20 @@
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
      "@/*": ["src/*"],
-     "@api/*": ["src/api"],
-     "@api-auth/*": ["src/api/auth"],
-     "@api-content/*": ["src/api/content"],
-     "@api-payments/*": ["src/api/payments"],
-     "@api-reports/*": ["src/api/reports"],
-     "@api-settings/*": ["src/api/settings"],
-     "@api-support/*": ["src/api/support"],
-     "@config/*": ["src/config"],
-     "@interface/*": ["src/types"],
-     "@lib/*": ["src/lib"],
-     "@middleware/*": ["src/middleware"],
-     "@models/*": ["src/models"],
-     "@temp/*": ["src/temp"],
-     "@utils/*": ["src/utils"]
+     "@api/*": ["src/api/*"],
+     "@api-auth/*": ["src/api/auth/*"],
+     "@api-content/*": ["src/api/content/*"],
+     "@api-payments/*": ["src/api/payments/*"],
+     "@api-reports/*": ["src/api/reports/*"],
+     "@api-settings/*": ["src/api/settings/*"],
+     "@api-support/*": ["src/api/support/*"],
+     "@config/*": ["src/config/*"],
+     "@interface/*": ["src/types/*"],
+     "@lib/*": ["src/lib/*"],
+     "@middleware/*": ["src/middleware/*"],
+     "@models/*": ["src/models/*"],
+     "@temp/*": ["src/temp/*"],
+     "@utils/*": ["src/utils/*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

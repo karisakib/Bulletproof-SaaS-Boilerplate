@@ -1,8 +1,9 @@
-// require("dotenv").config();
-// const winston = require("winston");
+import config from "dotenv";
+import winston from "winston";
 // const { format } = require("winston");
-// require("winston-mongodb");
-// const morgan = require("morgan");
+
+import winstonMongoDB from "winston-mongodb";
+import morgan from "morgan";
 
 // const customRequestFormat =
 //  ":remote-addr - :remote-user [:date[clf]] :method :url HTTP/:http-version :status :user-agent";
@@ -27,9 +28,9 @@
 
 
 // const logger = winston.createLogger({
-//  // format: winston.format.combine(format.simple(), format.timestamp()),
+ // format: winston.format.combine(format.simple(), format.timestamp()),
 //  transports: [
-//   // write errors to console too
+  // write errors to console too
 //   new winston.transports.File({
 //    filename: "logs/info.log",
 //    level: "info",
@@ -40,16 +41,16 @@
 //    level: "error",
 //    format: winston.format.combine(format.timestamp(), format.json()),
 //   }),
-//   // new winston.transports.MongoDB({
-//   //  db: process.env.MONGODB_URL,
-//   //  collection: "logs.http",
-//   //  level: "http",
-//   //  label: "http",
-//   //  expireAfterSeconds: 86400, // Logs expire after 24 hours (86400 seconds)
-//   //  tryReconnect: true,
-//   //  silent: false, // This option will suppress logging transport, meaning it won't actually log anything to MongoDB
-//   //  options: { useUnifiedTopology: true },
-//   // }),
+  // new winston.transports.MongoDB({
+  //  db: process.env.MONGODB_URL,
+  //  collection: "logs.http",
+  //  level: "http",
+  //  label: "http",
+  //  expireAfterSeconds: 86400, // Logs expire after 24 hours (86400 seconds)
+  //  tryReconnect: true,
+  //  silent: false, // This option will suppress logging transport, meaning it won't actually log anything to MongoDB
+  //  options: { useUnifiedTopology: true },
+  // }),
 //   new winston.transports.MongoDB({
 //    db: process.env.MONGODB_URL,
 //    collection: "logs.info",
@@ -76,13 +77,13 @@
 //    filename: "logs/rejections.log",
 //   }),
 //  ],
-//  // exceptionHandlers: [
-//  //  new winston.transports.File({
-//  //   filename: "logs/exceptions.log",
-//  //  }),
-//  // ],
+ // exceptionHandlers: [
+ //  new winston.transports.File({
+ //   filename: "logs/exceptions.log",
+ //  }),
+ // ],
 //  handleRejections: true,
-//  // handleExceptions: false,
+ // handleExceptions: false,
 //  exitOnError: false,
 // });
 

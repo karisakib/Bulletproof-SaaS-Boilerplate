@@ -1,12 +1,12 @@
-// TODO: Testing X-API-KEY header
+import { Request, Response, NextFunction } from "express";
 
-const checkApiKey = async (req, res) => {
- // If API Key is missing, throw a 401 -> Missing API Key.
+
+export async function isApiKey(req: Request, res: Response, next: NextFunction) {
+ // If API Key is missing, throw a 401 -> Missing API Key. 
  if (!req.header("X-API-KEY")) {
-  res.status(401).json({
-   message: "400 Bad Request. Missing API KEY Header.",
-  });
+  res.status(400).json({ error: "400 Bad Request. Missing API KEY Header." });
  }
+ next();
 
  // If API Key provided but user email missing, throw a 401 -> Missing user email.
  if (req.header("X-API-KEY") && !req.body.email) {
@@ -30,13 +30,6 @@ const checkApiKey = async (req, res) => {
    message: "401 Unauthorized. Are you missing an API Key in your request?",
   });
  } else {
-  res.status(200).json({
-   db: {
-    users,
-    apikeys,
-   },
-  });
+  res.status(200).json({ message: "Authenticated"});
  }
-};
-
-module.exports = { checkApiKey };
+}

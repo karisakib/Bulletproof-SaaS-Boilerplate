@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from "react-router";
-import Legal from "../views/legal/Legal";
+import Legal from "../views/legal/LegalLayout";
 import NotFound from "../components/layout/NotFound";
 import { legalMarkdownComponents } from "../config/legal.constant";
 

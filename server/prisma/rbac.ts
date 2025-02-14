@@ -1,4 +1,5 @@
 // This file contains the roles and permissions for the application
+// TODO: Take this over to PRISMA
 
 export const RBAC = {
  user: {
