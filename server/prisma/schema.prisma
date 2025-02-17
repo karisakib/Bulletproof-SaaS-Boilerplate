@@ -16,9 +16,10 @@ model User {
  verified     Boolean   @default(false)
  role         String    @default("user")
  subscription String?
+ is_active    Boolean?
  createdAt    DateTime  @default(now())
  updated_at   DateTime? @updatedAt
- deleted_at   DateTime? 
+ deleted_at   DateTime?
 
  // Relations
  // auth        Auth?
@@ -33,14 +34,15 @@ enum Role {
 }
 
 model Auth {
- email        String   @id // Changed to @id to represent 1:1 relationship with User
- hash         String
- otp          String
- retries      Int      @default(0)
- refreshToken String?
- resetToken   String?
- createdAt    DateTime @default(now())
- expiresAt    DateTime
+ email              String   @id // Changed to @id to represent 1:1 relationship with User
+ hash               String
+ otp                String
+ retries            Int      @default(0)
+ refreshToken       String?
+ resetToken         String?
+ lastPasswordChange String?
+ createdAt          DateTime @default(now())
+ expiresAt          DateTime
 
  // Relation back to User
  // user   User @relation(fields: [userId], references: [id])
@@ -48,13 +50,36 @@ model Auth {
 }
 
 model UserPreferences {
+ // id
  email               String  @id
  theme               String  @default("light")
+ language            String?
  email_notifications Boolean @default(true)
  sms_notifications   Boolean @default(false)
 
  // Relation back to User
  user User @relation(fields: [email], references: [email])
+}
+
+model UserSubscriptions {
+ // id
+ email            String  @id
+ type             String? // "free"
+ creditsUsed      String?
+ creditsRemaining String?
+ subscriptonStart String?
+ subscriptionEnd  String?
+}
+
+model UserPayments {
+ paymentMethod      String    @id
+ amount             String?
+ paymentDate        DateTime?
+ billingAddress     String?
+ cardLastFourDigits String?
+ default            Boolean?
+ createdAt          DateTime?
+ updatedAt          DateTime?
 }
 
 model ApiKey {

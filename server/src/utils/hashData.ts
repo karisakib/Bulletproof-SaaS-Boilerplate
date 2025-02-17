@@ -18,7 +18,7 @@ const verifyHashedData = async (unhashed, hashed) => {
  }
 };
 
-module.exports = {
+export default {
  hashData,
  verifyHashedData
 }

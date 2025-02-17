@@ -15,6 +15,7 @@
     "test:client": "pnpm --filter client run test",
     "test:server": "pnpm --filter server run test",
     "test:e2e": "pnpm --filter e2e run test",
+    "test:lhci": "pnpm --filter client run build && pnpm --filter client run start && pnpm lhci:autorun",
     "build:client": "pnpm --filter client run build",
     "build:server": "pnpm --filter server run build"
   },

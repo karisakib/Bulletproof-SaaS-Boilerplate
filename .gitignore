@@ -144,3 +144,7 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Lighthouse CI
+.lighthouseci
+/.lighthouseci/
