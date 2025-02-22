@@ -1,3 +1,4 @@
+import Banner from "../../components/common/Banner";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 
@@ -8,6 +9,10 @@ interface BaseLayoutProps {
 const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
+
+      {/* Banner */}
+      <Banner />
+
       {/* Fixed Navbar */}
       <Navbar />
 

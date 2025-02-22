@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
 const router: Router = Router();
 
-// Get user profile details
-router.get("/profile", async (req: Request, res: Response) => {
+// Get user details
+router.get("/userId", async (req: Request, res: Response) => {
  res
   .status(200)
   .json({ status: "OK", message: "working" });
@@ -120,7 +120,6 @@ export default router;
 
 
 // User Management - Admin:
-
 
 // View Users: GET /admin/users
 // router.get("/users", async (req: Request, res: Response) => {
@@ -282,45 +281,6 @@ export default router;
 //   res.status(500).json({ error: "Internal Server Error" });
 //  }
 // });
-
-
-// View Roles
-// router.get("/roles", (req: Request, res: Response) => {
-//  res.status(200).json({
-//   status: "OK",
-//  })
-// });
-
-// View specific Role details
-// router.get("/roles/:role", (req: Request, res: Response) => {
-//  res.status(200).json({
-//   status: "OK",
-//  })
-// });
-
-// Create Role
-// router.post("/roles", (req: Request, res: Response) => {
-//  res.status(200).json({
-//   status: "OK",
-//  })
-// });
-
-
-// Edit Role
-// router.put("/roles/:role", (req: Request, res: Response) => {
-//  res.status(200).json({
-//   status: "OK",
-//  })
-// });
-
-
-// Delete Role
-// router.delete("/roles/:role", (req: Request, res: Response) => {
-//  res.status(200).json({
-//   status: "OK",
-//  })
-// });
-
 
 // Assign Role: POST /users/roles/assign
 // Revoke Role: DELETE /users/roles/revoke

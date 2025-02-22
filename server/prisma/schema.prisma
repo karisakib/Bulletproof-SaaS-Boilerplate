@@ -61,14 +61,26 @@ model UserPreferences {
  user User @relation(fields: [email], references: [email])
 }
 
+enum RenewalPeriods {
+ monthly // 30 days
+ yearly // 365 days
+}
+
 model UserSubscriptions {
  // id
  email            String  @id
  type             String? // "free"
  creditsUsed      String?
  creditsRemaining String?
- subscriptonStart String?
- subscriptionEnd  String?
+ startDate String?
+ endDate  String?
+ renewalDate String?
+ price            String?
+ currency String?
+ frequency RenewalPeriods?
+ status Boolean?
+ category String?
+
 }
 
 model UserPayments {

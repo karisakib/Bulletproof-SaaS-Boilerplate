@@ -1,45 +1,27 @@
 import request, { Response } from 'supertest';
 import app from "../src/server";
+import { AuthService } from '@/api/auth/auth-services';
 // https://www.freecodecamp.org/news/how-to-test-in-express-and-mongoose-apps/
 // https://github.com/porsager/postgres?tab=readme-ov-file
 
 
 // Arrange - Act - Assert model from 'Tao of Node'
 
-describe('Home Endpoint', () => {
- it('should bring us to the home page', async (): Promise<void> => {
+describe('Register a new user', () => {
+ it('should successfully create a new user', async (): Promise<void> => {
   // 1. Arrange - prepare the data, create any objects you need
-  // const user = {
-  // name: "...",
-  // age: 27
-  //    }
+  const mockUser = {
+   firstName: "User",
+   lastName: "Name",
+   email: "example@email.com",
+   password: "password"
+  }
   // 2. Act - execute the logic that you're testing
   const res: Response = await request(app).get('/')
-  // const result = userService.create(mockUser)
+  const result = AuthService.register(mockUser.email, mockUser.password)
 
   // 3. Assert - validate the expected result
-  expect(res.statusCode).toEqual(200)
+  expect(res.statusCode).toEqual(201)
+  expect(result).toEqual({ success: true, message: "User created successfully" })
  })
 })
-
-
-// describe('User Service', () => {
-//  it('Should create a user given correct data', async () => {
-// 1. Arrange - prepare the data, create any objects you need
-//    const mockUser = {
-// ...
-//    }
-//    const userService = createUserService(
-//      mockLogger,
-//      mockQueryBuilder
-//    )
-
-// 2. Act - execute the logic that you're testing
-//    const result = userService.create(mockUser)
-
-// 3. Assert - validate the expected result
-//    expect(mockLogger).toHaveBeenCalled()
-//    expect(mockQueryBuilder).toHaveBeenCalled()
-//    expect(result).toEqual(/** ... */)
-//  })
-// })

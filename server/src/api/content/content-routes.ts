@@ -13,7 +13,6 @@ router.get("/blog", ContentHandlers.getAllBlogPosts);
 
 // Get a specific blog post
 router.get("/blog/:title",
- checkSchema(contentSchemas.getPost),
  async (req: Request, res: Response) => {
  res.status(200).json({
   status: "OK",
@@ -25,6 +24,7 @@ router.get("/blog/:title",
 
 // Create a new blog post - admin
 router.post("/blog",
+ // isAdmin,
  checkSchema(contentSchemas.createPost),
  async (req: Request, res: Response) => {
  res.status(201).json({
@@ -51,8 +51,6 @@ router.delete("blog/:title", (req: Request, res: Response) => {
   message: "working"
  })
 });
-
-
 
 // Get announcement banner
 router.get("/banner", async (req: Request, res: Response) => {

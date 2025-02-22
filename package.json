@@ -17,7 +17,10 @@
     "test:e2e": "pnpm --filter e2e run test",
     "test:lhci": "pnpm --filter client run build && pnpm --filter client run start && pnpm lhci:autorun",
     "build:client": "pnpm --filter client run build",
-    "build:server": "pnpm --filter server run build"
+    "build:server": "pnpm --filter server run build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

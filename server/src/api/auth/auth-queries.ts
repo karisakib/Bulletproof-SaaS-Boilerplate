@@ -11,9 +11,9 @@ export class AuthQueries {
   });
  }
 
- static async createUser(email: string, hash: string, subscription: string) {
+ static async createUser(email: string, hash: string) {
   return prisma.user.create({
-   data: { email, hash, subscription }
+   data: { email, hash }
   });
  }
 

@@ -1,5 +1,7 @@
 packages:
- - 'client'
- - 'server'
- - 'e2e'
+  - 'client'
+  - 'server'
+  - 'e2e'
+  - 'mobile'
+  - 'docs'
  # - 'apps/*'

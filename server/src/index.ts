@@ -1,5 +1,5 @@
 import app from "./server"
-import appConfig from "@config/config";
+import appConfig from "@config/app-config";
 // import { logger } from "./utils/logger"
 
 

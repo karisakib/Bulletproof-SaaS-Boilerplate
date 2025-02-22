@@ -1,5 +1,6 @@
 import SEO from "../../components/common/SEO";
 import BaseLayout from "./BaseLayout";
+import ContactSection from "../../components/common/ContactSection";
 
 function Contact() {
  return (
@@ -9,9 +10,7 @@ function Contact() {
     description="Put this in the global SEO config file"
     url="Put this in the global SEO config file"
    />
-   <h1>
-   Contact route from Client-side
-   </h1>
+   <ContactSection />
   </BaseLayout>
  );
 }
