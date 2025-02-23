@@ -1,8 +1,15 @@
 import { ReactNode } from "react";
 import SEO from "../../components/common/SEO";
 import BaseLayout from "./BaseLayout";
+import HeroSection from "../../components/landing/HeroSection";
+import LogoGrid from "../../components/landing/LogoGrid";
+import SocialProofSection from "../../components/landing/SocialProofSection";
+import CTASection from "../../components/landing/CTASection";
+import FeaturesSection from "../../components/landing/FeaturesSection";
+import PricingSection from "../../components/landing/PricingSection";
+import FAQSection from "../../components/landing/FAQSection";
 
-function Landing(): ReactNode {
+export default function Landing(): ReactNode {
  return (
   <BaseLayout>
    <SEO
@@ -10,11 +17,16 @@ function Landing(): ReactNode {
     description="Put this in the global SEO config file"
     url="Put this in the global SEO config file"
    />
-   <h1>
-   Landing route from Client-side
-   </h1>
+   <HeroSection />
+   <LogoGrid />
+   {/* <DemoSection /> */}
+   {/* <PainSection /> */}
+   <SocialProofSection />
+   <CTASection />
+   <FeaturesSection />
+   <PricingSection />
+   <FAQSection />
+   <CTASection />
   </BaseLayout>
  );
 }
-
-export default Landing;

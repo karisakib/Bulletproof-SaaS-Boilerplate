@@ -17,7 +17,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
       <Navbar />
 
       {/* Main Content (Centered) */}
-      <main className="flex-grow flex items-center justify-center px-6">
+      <main className="flex-grow flex items-center justify-center px-6 flex-col">
         {children}
       </main>
 
