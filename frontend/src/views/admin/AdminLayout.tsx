@@ -1,3 +1,10 @@
+/**
+ * * This is how the admin layout should look
+ * ! https://flowbite.com/application-ui/preview/
+ * ? Should we use Shadcn or flowbite?
+ * TODO build out admin layout according to the design
+ */
+
 const AdminLayout: React.FC = () => {
  return (
   <div>

@@ -111,6 +111,7 @@ model Blog {
  author    String   @default("Admin") // Point this to the owner's or content writer's name
  image     String   @default("https://source.unsplash.com/random") // Point this to a default image from the public directory or upload to cloudinary/S3 and use that link
  content   String // Markdown content
+ views     Int      @default(0)
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
 
