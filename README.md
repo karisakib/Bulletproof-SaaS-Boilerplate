@@ -320,3 +320,34 @@ describe("User Service", () => {
 ##### Load Tests (Artillery)
 
 Load tests are ran using Artillery. See the artillery.yml file.
+
+## 🤝 Contributing
+
+### Clone the repo
+
+```bash
+git clone https://github.com/xxxxx/xxxxxx
+cd xxxxx
+```
+
+### Build the project
+
+```bash
+command
+```
+
+### Run the project
+
+```bash
+command
+```
+
+### Run the tests
+
+```bash
+command
+```
+
+### Submit a pull request
+
+If you'd like to contribute, please fork the repository and open a pull request to the `main` branch.
